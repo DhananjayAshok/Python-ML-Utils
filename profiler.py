@@ -15,5 +15,5 @@ class Profiler:
           if self.name is not None:
               to_print = f"{self.name} | " + to_print
           print(f"{msg} | {interval}s")
-      self.t = time.time()
+      self.t = perf_counter()
       return
