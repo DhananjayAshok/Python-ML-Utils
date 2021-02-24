@@ -1,6 +1,6 @@
 import inspect
 
-class shapePrinter:
+class ShapePrinter:
     def __init__(self, name="", show=True, limit=20):
         self.name = name
         self.show = show
