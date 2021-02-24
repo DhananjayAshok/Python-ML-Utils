@@ -15,7 +15,7 @@ class ShapePrinter:
         try:
             shape = object.shape
         except:
-            print(f"Object {var_name} given to {self.name} at line {line} does not have a shape"
+            print(f"Object {var_name} given to {self.name} at line {line} does not have a shape")
             return
         if self.counter < self.limit:
             print(f"{self.name} | {var_name} | {line} | {shape}")
