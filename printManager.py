@@ -10,7 +10,7 @@ class PrintManager:
       
       def print(self, msg):
           if self.filename is not None:
-              return self.file_write(msg)
+              return self.file_write(msg + "\n")
           else:
               print(f"{msg}")
           return
