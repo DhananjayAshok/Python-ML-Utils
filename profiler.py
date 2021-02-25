@@ -1,9 +1,11 @@
 from time import perf_counter
+from .printManager import PrintManager
 
 class Profiler:
-  def __init__(self, name=None, show=True):
+  def __init__(self, name=None, show=True, file_name=None):
       self.name = name
       self.show = show
+      self.printer = PrintManager(filename)
       self.t = perf_counter()
   
   def step(self, msg=None):
@@ -14,6 +16,6 @@ class Profiler:
           to_print = f"{msg} | {interval}s"
           if self.name is not None:
               to_print = f"{self.name} | " + to_print
-          print(to_print)
+          self.printer.print(to_print)
       self.t = perf_counter()
       return
