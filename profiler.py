@@ -2,7 +2,7 @@ from time import perf_counter
 from .printManager import PrintManager
 
 class Profiler:
-  def __init__(self, name=None, show=True, file_name=None):
+  def __init__(self, name=None, show=True, filename=None):
       self.name = name
       self.show = show
       self.printer = PrintManager(filename)
