@@ -2,10 +2,10 @@ import inspect
 from .printManager import PrintManager
 
 class ShapePrinter:
-    def __init__(self, name="", show=True, limit=20, filename=None):
+    def __init__(self, name="", show=True, limit=-1, filename=None):
         self.name = name
         self.show = show
-        self.limit = 20
+        self.limit = limit
         self.counter = 0
         self.printer = PrintManager(filename)
         
@@ -20,7 +20,7 @@ class ShapePrinter:
         except:
             self.printer.print(f"Object {var_name} given to {self.name} at {meta_string} does not have a shape")
             return
-        if self.counter < self.limit:
+        if self.counter < self.limit or self.limit < 0:
             self.printer.print(f"{self.name} | {var_name} | {meta_string} | {shape}")
             self.counter += 1
             return
