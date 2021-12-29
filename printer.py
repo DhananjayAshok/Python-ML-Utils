@@ -3,15 +3,21 @@ from .printManager import PrintManager
 
 
 class Printer:
-    def __init__(self, name="", show=True, limit=-1, filename=None):
+    def __init__(self, name="", show_meta=True, limit=-1, filename=None):
         self.name = name
-        self.show = show
+        self.show_meta = show_meta
         self.limit = limit
         self.counter = 0
         self.printer = PrintManager(filename)
 
     def can_print(self):
-        return self.counter < self.limit or self.limit < 0 
+        return self.counter < self.limit or self.limit < 0
+
+    def _get_meta_string(self, details):
+        if self.show_meta:
+            return f"{details[0]}: line {details[1]}"
+        else:
+            return ""
     
     def print(self, msg):
         if self.can_print():
@@ -20,11 +26,9 @@ class Printer:
         return
     
     def print_shape(self, obj, var_name):
-        if not self.show:
-            return
         shape = None
         details = inspect.getframeinfo(inspect.currentframe().f_back)
-        meta_string = f"{details[0]}: line {details[1]}"
+        meta_string = self._get_meta_string(details)
         try:
             shape = obj.shape
         except:
@@ -35,7 +39,7 @@ class Printer:
     
     def print_mean_std_min_max(self, obj, var_name):
         details = inspect.getframeinfo(inspect.currentframe().f_back)
-        meta_string = f"{details[0]}: line {details[1]}"
+        meta_string = self._get_meta_string(details)
         m, s = None, None
         try:
             m = obj.mean()
@@ -51,7 +55,7 @@ class Printer:
     
     def print_has_nans(self, obj, var_name, always_print=False):
         details = inspect.getframeinfo(inspect.currentframe().f_back)
-        meta_string = f"{details[0]}: line {details[1]}"
+        meta_string = self._get_meta_string(details)
         has_nans = None
         try:
             has_nans = obj.isnan().any()
