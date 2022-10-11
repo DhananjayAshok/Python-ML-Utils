@@ -12,7 +12,7 @@ def safe_mkdir(path):
             return -1
 
 
-def pit(it, *pargs, **nargs):
+def pbar(it, *pargs, **nargs):
     import enlighten
     global __pit_man__
     try:
